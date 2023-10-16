@@ -1,0 +1,19 @@
+{
+  "name": "password_generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "pack": "electron-packager . --overwrite",
+    "b-win": "npm run pack -- --platform=win32",
+    "b-linux": "npm run pack -- --platform=linux"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^23.0.0"
+  }
+}

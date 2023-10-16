@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/favicon.ico">
+    <link rel="stylesheet" href="assets/bootstrap.min.css">
+    <title>Password Generator</title>
+</head>
+<body style="background-color: #0e0e0e;">
+<div class="container">
+<div class="row mt-5">
+<div class="col-md-6 mx-auto mt-5">
+<div class="card card-body mt-5">
+    <h1 class="d-flex justify-content-center align-items-center mb-4 text-dark"><img src="assets/favicon.ico">Password Generator</h1>
+    <label for="passwordLength" class="mb-0">Password Length: <span id="pass_len">10</span></label>
+    <input type="range" class="custom-range" min="5" max="100" step="1" value="10" id="passwordLength">
+
+    <div class="mx-auto mt-2">
+        <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="useLowercase" checked>
+            <label class="custom-control-label" for="useLowercase">Include lowercase characters</label>
+        </div>
+    
+        <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="useUppercase" checked>
+            <label class="custom-control-label" for="useUppercase">Include uppercase characters</label>
+        </div>
+    
+        <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="useDigits">
+            <label class="custom-control-label" for="useDigits">Include digits</label>
+        </div>
+    
+        <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="useSymbols">
+            <label class="custom-control-label" for="useSymbols">Include symbols</label>
+        </div>
+    </div>
+    <button class="btn btn-primary my-3" onclick="generatePassword()">Generate Password</button>
+    <span>Generated Password:</span>
+    <div id="generatedPassword" class="shadow-sm border px-3 py-2" style="background-color: #ebebeb;"></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+document.getElementById("passwordLength").addEventListener("input", function(){
+    document.getElementById("pass_len").innerHTML = this.value;
+});
+function generatePassword(){
+    let passwordLength = document.getElementById("passwordLength").value;
+    let useLowercase = document.getElementById("useLowercase").checked;
+    let useUppercase = document.getElementById("useUppercase").checked;
+    let useDigits = document.getElementById("useDigits").checked;
+    let useSymbols = document.getElementById("useSymbols").checked;
+    let characters = "";
+    if (useLowercase) {
+        characters += "abcdefghijklmnopqrstuvwxyz";
+    }
+    if (useUppercase) {
+        characters += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    }
+    if (useDigits) {
+        characters += "0123456789";
+    }
+    if (useSymbols) {
+        characters += "!@#$%^&*()_+=-";
+    }
+    let password = "";
+    for (let i = 0; i < passwordLength; i++) {
+        password += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    document.getElementById("generatedPassword").innerHTML = password;
+}
+</script>
+</body>
+</html>
